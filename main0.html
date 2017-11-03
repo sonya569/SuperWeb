@@ -1,0 +1,244 @@
+﻿<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Paint</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<!-- SVGjs -->
+	<script type="text/javascript" src="SVG.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="style0.css">
+</head>
+
+<body onload="draw()">
+
+<!--Menu-->
+<nav class="navbar navbar-default">
+		<div class="collapse navbar-collapse" id="menu">
+			<ul class="nav navbar-nav">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" >File</a>
+					<ul class="dropdown-menu">
+						<li><a id="mOpen" class="button">Open</a></li>
+						<li><a id="mSave" class="button">Save</a></li>
+						<li><a id="mExit" class="button">Exit</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" >Element type</a>
+					<ul class="dropdown-menu">
+						<li><a id="mSimpleFigure" class="button">Figure</a></li>
+						<li><a id="mTextFigure"   class="button">Figure with Text</a></li>
+						<li><a id="mImageFigure"  class="button">Figure with Image</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Edit</a>
+					<ul class="dropdown-menu">
+						<li><a id="mColor" class="button">Color</a></li>
+						<li><a id="mWidth" class="wbutton">Width</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Page</a>
+					<ul class="dropdown-menu">
+						<li><a id="mAdd"    class="button">Add</a></li>
+						<li><a id="mDelete" class="button">Delete</a></li>
+						<li><a id="mRename" class="button">Rename</a></li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown">Options</a>
+					<ul class="dropdown-menu">
+						<li class="dropdown-submenu">
+							<a class="test">Plugins<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a id="mSimpleFigure" class="button">Figure</a></li>
+								<li><a id="mTextFigure"   class="button">Figure with text</a></li>
+								<li><a id="mImageFigure"  class="button">Figure with image</a></li>
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a class="test">Language<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a id="mEng" class="button">English</a></li>
+								<li><a id="mRus" class="button">Russian</a></li>
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a class="test">Themes<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a id="mThemes" class="button">Hallow</a></li>
+								<li><a id="mThemes" class="button">Dark</a></li>
+							</ul>
+						</li>
+						<li class="dropdown-submenu">
+							<a class="test">Clouds<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a id="mSign" class="button">Sign in</a></li>
+								<li><a id="mSynch" class="button">Synchronize</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" >Help</a>
+						<ul class="dropdown-menu">
+							<li><a id="mInstructions" class="button">Instructions</a></li>
+							<li><a id="mAuthors" class="button">About Authors</a></li>
+							<li><a id="mUpdates" class="button">Check for updates</a></li>
+						</ul>
+					</ul>
+				</li>				
+			</ul>
+		</div>
+	
+</nav>
+
+    <!--ToolBar-->
+<nav class="navbar navbar-default">
+	
+		<div class="collapse navbar-collapse" id="toolBar">
+			<ul class="nav navbar-nav">
+			    <button id="tSave" class="btn navbar-btn">
+					<span class="glyphicon glyphicon-floppy-save"></span>
+					<br/>
+				</button>
+				<button id="tOpen" class="btn navbar-btn">
+					<span class="glyphicon glyphicon-download-alt"></span>
+					<br/>
+				</button>
+					<input type="Color" id="tColor">
+					<select class="width" id="tWidth">
+						<option>10</option>
+						<option>5</option>
+						<option>3</option>
+					</select>
+			</ul>
+		</div>
+	
+</nav>
+
+<div class="row">
+	<div class="col-sm-2">
+		<!--Plugins-->
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">Element type</div>
+			<div class="panel-body">
+				<p><input type=radio name=elements>Figure
+				<p><input type=radio name=elements>Figure with text
+				<p><input type=radio name=elements>Figure with image
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-8">
+	<!--TabControl-->
+		<div id=tabBtn>
+			<button>Add</button>
+			<button>Delete</button>
+		</div>
+		
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#tab1">Tab 1</a></li>
+			<li><a data-toggle="tab" href="#tab2">Tab 2</a></li>
+		</ul>
+		
+		<!--TabPages-->
+		<div class="tab-content">
+			<div id="tab1" class="tab-pane fade in active">
+				<svg class="col-sm-12" height="400" id="tablet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<rect x="120" y="5" width="90" height="90" stroke="blue" fill="none"/>
+				</svg>
+				
+			</div>
+			<div id="tab2" class="tab-pane fade">
+				<svg class="col-sm-12" height="400" id="tablet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"></svg>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-2">
+	<!--Properties-->
+		<div class="panel panel-default">
+			<div class="panel-heading text-center">Properties</div>
+			<div class="panel-body">
+				<input type="Color" id="pColor">
+			</div>
+			<div class="panel-body">
+				<select id="pWidth" class="width">
+					<option>10</option>
+					<option>5</option>
+					<option>3</option>
+				</select>
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript" src="scripts/ucommand.js"></script>
+<script type="text/javascript" src="scripts/xcommand.js"></script>
+<script type="text/javascript" src="scripts/menubar.js"></script>
+<script type="text/javascript" src="scripts/toolbar.js"></script>
+</html>
+
+<script>
+    $(document).ready(function(){
+        $('.dropdown-submenu a.test').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+
+</script>
+
+<script>
+	var tablet;
+	var currentPath;
+    var pointX;
+    var pointY;
+    var svgNS = "http://www.w3.org/2000/svg";
+	var tColor;
+	var tWidth;
+	
+    
+    function draw() {
+        tablet = document.getElementById('tablet');
+        tablet.addEventListener("mousedown", Down);
+        tablet.addEventListener("mousemove", Move);
+		tColor = document.getElementById("tColor");
+		tWidth = document.getElementById("tWidth");
+		tWidth = tWidth.options[tWidth.selectedIndex];
+		
+    }
+
+    function Down(e){
+		console.log(tWidth);
+	    currentPath = document.createElementNS(svgNS, 'path');
+		currentPath.setAttributeNS(null, 'stroke', tColor.value);
+		currentPath.setAttributeNS(null, 'stroke-width', tWidth.value);
+		currentPath.setAttributeNS(null, 'fill', 'none');
+        pointX = e.offsetX;
+        pointY = e.offsetY;
+	    currentPath.setAttributeNS(null, "d", "M" + pointX + " " + pointY + " ");
+		tablet.appendChild(currentPath);
+    }
+    function Move(e){
+        if( e.buttons === 1 ) {
+             pointX = e.offsetX;
+			 pointY = e.offsetY;
+            var pathCurrentAttr = currentPath.getAttribute('d');
+            currentPath.setAttributeNS(null, 'd', pathCurrentAttr + "L" + pointX + " " + pointY + " ");
+        }
+    }
+
+    
+</script>
